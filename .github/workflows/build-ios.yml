@@ -9,6 +9,13 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+      - name: Generate 1024px App Icon
+        run: |
+          set -euo pipefail
+          mkdir -p ItamarOSAuthenticator/Assets.xcassets/AppIcon.appiconset
+          sips -s format png -z 1024 1024 assets/icon-source.png \
+            --out ItamarOSAuthenticator/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          sips -g pixelWidth -g pixelHeight ItamarOSAuthenticator/Assets.xcassets/AppIcon.appiconset/AppIcon.png
       - name: Select stable Xcode and generator
         run: |
           xcodebuild -version
