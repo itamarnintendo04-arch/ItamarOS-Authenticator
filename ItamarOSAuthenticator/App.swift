@@ -269,6 +269,11 @@ struct AppHome: View {
                 .tabItem { Label("Approvals", systemImage: "shield.lefthalf.filled") }
             NavigationStack {
                 Form {
+                    Section("Appearance") {
+                        NavigationLink { ChangeAppIconView() } label: {
+                            Label("Change App Icon", systemImage: "paintpalette.fill")
+                        }
+                    }
                     Section("Security") {
                         Toggle("Require device unlock", isOn: $vault.requireUnlock)
                             .onChange(of: vault.requireUnlock) { value in
@@ -278,7 +283,7 @@ struct AppHome: View {
                             .font(.footnote).foregroundStyle(.secondary)
                     }
                     Section("ItamarOS") {
-                        Text("ItamarOS Authenticator • Version 1.3")
+                        Text("ItamarOS Authenticator • Version 1.4")
                         Text("Six-digit codes only")
                     }
                 }

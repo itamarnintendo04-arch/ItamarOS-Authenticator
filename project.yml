@@ -6,8 +6,8 @@ settings:
     SWIFT_VERSION: '5.0'
     IPHONEOS_DEPLOYMENT_TARGET: '16.0'
     TARGETED_DEVICE_FAMILY: '1,2'
-    MARKETING_VERSION: '1.3.1'
-    CURRENT_PROJECT_VERSION: '5'
+    MARKETING_VERSION: '1.4.0'
+    CURRENT_PROJECT_VERSION: '6'
     CODE_SIGNING_ALLOWED: NO
 targets:
   ItamarOSAuthenticator:
@@ -22,8 +22,8 @@ targets:
       path: ItamarOSAuthenticator/Info.plist
       properties:
         CFBundleDisplayName: ItamarOS Authenticator
-        CFBundleShortVersionString: '1.3.1'
-        CFBundleVersion: '5'
+        CFBundleShortVersionString: '1.4.0'
+        CFBundleVersion: '6'
         NSCameraUsageDescription: Scan QR codes to add authenticator accounts.
         NSFaceIDUsageDescription: Protect authentication codes and approve ItamarOS sign-in requests.
         UILaunchScreen: {}
@@ -40,5 +40,6 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         SUPPORTS_MACCATALYST: NO
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: 'ItamarIconBlue ItamarIconGreen ItamarIconPurple ItamarIconPink ItamarIconOrange ItamarIconRed'
     scheme:
       testTargets: []

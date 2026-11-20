@@ -16,6 +16,10 @@ jobs:
           sips -s format png -z 1024 1024 assets/icon-source.png \
             --out ItamarOSAuthenticator/Assets.xcassets/AppIcon.appiconset/AppIcon.png
           sips -g pixelWidth -g pixelHeight ItamarOSAuthenticator/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+      - name: Generate Home Screen color icons
+        run: |
+          python3 -m pip install --break-system-packages Pillow
+          python3 scripts/generate_icon_variants.py
       - name: Select stable Xcode and generator
         run: |
           xcodebuild -version
