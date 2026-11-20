@@ -1,0 +1,37 @@
+name: Build ItamarOS Authenticator IPA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  ios:
+    runs-on: macos-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select stable Xcode and generator
+        run: |
+          xcodebuild -version
+          brew install xcodegen
+          xcodegen generate --spec project.yml
+      - name: Build iOS application
+        run: |
+          set -euo pipefail
+          xcodebuild -project ItamarOSAuthenticator.xcodeproj \
+            -scheme ItamarOSAuthenticator \
+            -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$PWD/build" \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
+      - name: Package unsigned IPA
+        run: |
+          set -euo pipefail
+          test -d build/Build/Products/Release-iphoneos/ItamarOSAuthenticator.app
+          mkdir -p dist/Payload
+          cp -R build/Build/Products/Release-iphoneos/ItamarOSAuthenticator.app dist/Payload/
+          (cd dist && zip -qr ../ItamarOSAuthenticator-unsigned.ipa Payload)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ItamarOSAuthenticator-unsigned-IPA
+          path: ItamarOSAuthenticator-unsigned.ipa
+          if-no-files-found: error
